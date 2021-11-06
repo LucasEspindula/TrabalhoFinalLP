@@ -35,40 +35,40 @@ public class Endereco {
 		
 		if (rua == null || rua.isBlank()) {
 			erros.add("informe uma rua");
-		} else if (rua != null && rua.length() != 100) {
-			erros.add("Numero maximo de caracter eh 100");
+		} else if (rua != null && rua.length() > 100) {
+			erros.add("Numero maximo de caracter eh 100 para rua");
 		} 
 		
-		if (numero.length() != 6) {
-			erros.add("Numero maximo de caracter eh 6");
+		if (numero != null && numero.length() > 6) {
+			erros.add("Numero maximo de caracter eh 6 para o numero");
 		}
 		
 		if (bairro == null || bairro.isBlank()) {
 			erros.add("informe um bairro");
-		} else if (bairro != null && bairro.length() != 50) {
-			erros.add("Numero maximo de caracter eh 50");
+		} else if (bairro != null && bairro.length() > 50) {
+			erros.add("Numero maximo de caracter eh 50 para o bairro");
 		} 
 		
-		if (complemento.length() != 120) {
-			erros.add("Numero maximo de caracter eh 120");
+		if (complemento != null && complemento.length() > 120) {
+			erros.add("Numero maximo de caracter eh 120 para o complemento");
 		}
 		
 		if (cep == null || cep.isBlank()) {
 			erros.add("informe um cep");
-		} else if (cep != null && cep.length() != 10) {
-			erros.add("Numero maximo de caracter eh 10");
+		} else if (cep != null && cep.length() > 10) {
+			erros.add("Numero maximo de caracter eh 10 para o cep");
 		} 
 		
 		if (cidade == null || cidade.isBlank()) {
 			erros.add("informe uma cidade");
-		} else if (cidade != null && cidade.length() != 50) {
-			erros.add("Numero maximo de caracter eh 50");
+		} else if (cidade != null && cidade.length() > 50) {
+			erros.add("Numero maximo de caracter eh 50 para a cidade");
 		}
 		
 		if (estado == null || estado.isBlank()) {
 			erros.add("informe um estado");
-		} else if (estado != null && estado.length() != 2) {
-			erros.add("Numero maximo de caracter eh 2");
+		} else if (estado != null && estado.length() > 2) {
+			erros.add("Numero maximo de caracter eh 2 para o estado");
 		}
 		
 		if (!erros.isEmpty()) {

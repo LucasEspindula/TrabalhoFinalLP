@@ -22,14 +22,14 @@ public class Cliente extends Pessoa{
 		
 		if (nome == null || nome.isBlank()) {
 			erros.add("informe um Nome");
-		} else if (nome != null && nome.length() != 100) {
-			erros.add("Numero maximo de caracter eh 100");
+		} else if (nome != null && nome.length() > 100) {
+			erros.add("Numero maximo de caracter eh 100 para o nome");
 		}
 		
 		if (cpf == null || cpf.isBlank()) {
 			erros.add("informe um cpf");
-		} else if (cpf != null && cpf.length() != 20) {
-			erros.add("Numero maximo de caracter eh 20");
+		} else if (cpf != null && cpf.length() > 20) {
+			erros.add("Numero maximo de caracter eh 20 para o cpf");
 		}
 		
 		if (!erros.isEmpty()) {
