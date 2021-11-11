@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class helper {
-	
+
 	public String gerador(int quantidade) {
 		String letras = "ABCDEFGHIJKLMNOPQRSTUVYWXZ";
 		 

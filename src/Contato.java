@@ -8,7 +8,6 @@ public class Contato {
 	private String telefone;
 
 	public Contato(String email, String telefone) {
-		super();
 		this.email = email;
 		this.telefone = telefone;
 		validacaoContato();

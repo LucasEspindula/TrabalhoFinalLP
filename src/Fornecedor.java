@@ -1,12 +1,24 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fornecedor extends Pessoa{
+public class Fornecedor extends Pessoa implements Dominio<Integer>{
 	
 	private String nomeFantasia;
 	
 	private String cnpj;
+	
+	private int identificador;
 
+	// CONSTRUTOR PARA UPDATE
+	public Fornecedor(int identificador, Contato contato, Endereco endereco, String nomeFantasia, String cnpj) {
+		super(contato, endereco);
+		this.nomeFantasia = nomeFantasia;
+		this.cnpj = cnpj;
+		this.identificador = identificador;
+		validacao();
+	}
+	
+	// CONSTRUTOR PARA INSERT
 	public Fornecedor(Contato contato, Endereco endereco, String nomeFantasia, String cnpj) {
 		super(contato, endereco);
 		this.nomeFantasia = nomeFantasia;
@@ -43,5 +55,9 @@ public class Fornecedor extends Pessoa{
 
 	public String getCnpj() {
 		return cnpj;
+	}
+
+	public Integer getId() {
+		return identificador;
 	}
 }

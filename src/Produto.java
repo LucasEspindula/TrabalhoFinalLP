@@ -10,7 +10,6 @@ public class Produto {
 	private Double valorUnitario;
 
 	public Produto(String nomeDoProduto, String descricaoDoProduto, Double valorUnitario) {
-		super();
 		this.nomeDoProduto = nomeDoProduto;
 		this.descricaoDoProduto = descricaoDoProduto;
 		this.valorUnitario = valorUnitario;
@@ -31,7 +30,7 @@ public class Produto {
 			erros.add("Numero maximo de caracter eh 500 para descricao do produto");
 		} 
 		
-		if (valorUnitario == null || valorUnitario < 0) {
+		if (valorUnitario == null || valorUnitario <= 0) {
 			erros.add("informe um valor valido para o produto");
 		}
 

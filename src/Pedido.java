@@ -10,69 +10,47 @@ public class Pedido {
 	
 	private Cliente cliente;
 	
-	private Double valorTotal;
-	
-	private Double valorTotalItens;
-	
 	private Double valorFrete;
 	
-	private List<Item> itens;
+	private List<Item> itens = new ArrayList<>();
 
-	public Pedido(Fornecedor fornecedor, Cliente cliente, Double valorTotal, Double valorTotalItens, 
-			Double valorFrete, List<Item> itens) {
-		super();
+	public Pedido(Fornecedor fornecedor, Cliente cliente, Double valorFrete, Item itens) {
 		this.dataCompra = LocalDateTime.now();
 		this.fornecedor = fornecedor;
 		this.cliente = cliente;
-		
-		this.valorTotal = valorTotal;
-		this.valorTotalItens = valorTotalItens;
-		
 		this.valorFrete = valorFrete;
-		this.itens = itens;
+		adicionarItem(itens);
+		validacao();
 	}
 	
-	protected void validacaoEndereco() {
+	public void adicionarItem(Item item) {
+		// methodo guarda chuva, impede do null entrar na lista
+		
+		if (item == null) {
+			return;
+		}
+		this.itens.add(item);
+	}
+	
+	protected void validacao() {
 		
 		List<String> erros = new ArrayList<String>();
 		
-//		if (rua == null || rua.isBlank()) {
-//			erros.add("informe uma rua");
-//		} else if (rua != null && rua.length() != 100) {
-//			erros.add("Numero maximo de caracter eh 100 para rua");
-//		} 
-//		
-//		if (numero.length() != 6) {
-//			erros.add("Numero maximo de caracter eh 6 para o numero");
-//		}
-//		
-//		if (bairro == null || bairro.isBlank()) {
-//			erros.add("informe um bairro");
-//		} else if (bairro != null && bairro.length() != 50) {
-//			erros.add("Numero maximo de caracter eh 50 para o bairro");
-//		} 
-//		
-//		if (complemento.length() != 120) {
-//			erros.add("Numero maximo de caracter eh 120 para o complemento");
-//		}
-//		
-//		if (cep == null || cep.isBlank()) {
-//			erros.add("informe um cep");
-//		} else if (cep != null && cep.length() != 10) {
-//			erros.add("Numero maximo de caracter eh 10 para o cep");
-//		} 
-//		
-//		if (cidade == null || cidade.isBlank()) {
-//			erros.add("informe uma cidade");
-//		} else if (cidade != null && cidade.length() != 50) {
-//			erros.add("Numero maximo de caracter eh 50 para a cidade");
-//		}
-//		
-//		if (estado == null || estado.isBlank()) {
-//			erros.add("informe um estado");
-//		} else if (estado != null && estado.length() != 2) {
-//			erros.add("Numero maximo de caracter eh 2 para o estado");
-//		}
+		if (fornecedor == null) {
+			erros.add("informe um fornecedor");
+		}
+		
+		if (cliente == null) {
+			erros.add("informe um cliente");
+		}
+		
+		if (valorFrete == null || valorFrete < 0) {
+			erros.add("informe o valor do frete");
+		}
+		
+		if (itens.isEmpty()) {
+			erros.add("informe pelomenos um item");
+		}
 		
 		if (!erros.isEmpty()) {
 			throw new IllegalArgumentException(erros.toString());
@@ -92,11 +70,15 @@ public class Pedido {
 	}
 
 	public Double getValorTotal() {
-		return valorTotal;
+		return getValorTotalItens() + getValorFrete();
 	}
 
 	public Double getValorTotalItens() {
-		return valorTotalItens;
+		double valorTotal = 0;		
+		for (Item item : itens) {
+			valorTotal += item.getValorTotal();
+		}
+		return valorTotal;
 	}
 
 	public Double getValorFrete() {

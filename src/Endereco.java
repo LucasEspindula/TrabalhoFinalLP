@@ -18,7 +18,6 @@ public class Endereco {
 	private String estado;
 
 	public Endereco(String rua, String numero, String bairro, String complemento, String cep, String cidade, String estado) {
-		super();
 		this.rua = rua;
 		this.numero = numero;
 		this.bairro = bairro;

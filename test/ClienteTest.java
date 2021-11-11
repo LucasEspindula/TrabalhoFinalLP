@@ -10,7 +10,13 @@ public class ClienteTest {
 		
 		Endereco enderecoOsvaldo = new Endereco("Rua Biribiri", "12", "Bairro andromeda", null, "123456", "Alvorada", "RS");
 		Contato contatoOsvaldo = new Contato("osvaldo@gmail.com", "123456789");
-		new Cliente(contatoOsvaldo, enderecoOsvaldo, "Osvaldo Silva", "123456789");
+		Cliente clienteTeste = new Cliente(1, contatoOsvaldo, enderecoOsvaldo, "Osvaldo Silva", "123456789");
+		
+		Assert.assertEquals(1, clienteTeste.getId(), 1);
+		Assert.assertEquals(contatoOsvaldo, clienteTeste.getContato());
+		Assert.assertEquals(enderecoOsvaldo, clienteTeste.getEndereco());
+		Assert.assertEquals("Osvaldo Silva", clienteTeste.getNome());
+		Assert.assertEquals("123456789", clienteTeste.getCpf());
 	}
 	
 	@Test
