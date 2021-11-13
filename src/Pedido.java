@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pedido {
+public class Pedido implements Dominio<Integer>{
 	
 	private LocalDateTime dataCompra;
 	
@@ -12,8 +12,11 @@ public class Pedido {
 	
 	private Double valorFrete;
 	
+	private int identificador;
+	
 	private List<Item> itens = new ArrayList<>();
 
+	// CONSTRUTOR PARA INSERT
 	public Pedido(Fornecedor fornecedor, Cliente cliente, Double valorFrete, Item itens) {
 		this.dataCompra = LocalDateTime.now();
 		this.fornecedor = fornecedor;
@@ -23,9 +26,19 @@ public class Pedido {
 		validacao();
 	}
 	
+	// CONSTRUTOR PARA UPDATE
+	public Pedido(int identificador, Fornecedor fornecedor, Cliente cliente, Double valorFrete, Item itens) {
+		this.dataCompra = LocalDateTime.now();
+		this.fornecedor = fornecedor;
+		this.cliente = cliente;
+		this.valorFrete = valorFrete;
+		this.identificador = identificador;
+		adicionarItem(itens);
+		validacao();
+	}
+	
 	public void adicionarItem(Item item) {
 		// methodo guarda chuva, impede do null entrar na lista
-		
 		if (item == null) {
 			return;
 		}
@@ -87,5 +100,9 @@ public class Pedido {
 
 	public List<Item> getItens() {
 		return itens;
+	}
+
+	public Integer getId() {
+		return identificador;
 	}
 }

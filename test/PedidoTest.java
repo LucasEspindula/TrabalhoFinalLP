@@ -7,12 +7,12 @@ public class PedidoTest {
 	@Test
 	public void deveTestarACriacaoDeUmPedidoValido() {
 		
-		Endereco enderecoFornecedor = new Endereco("Rua Biribiri", "12", "Bairro andromeda", null, "123456", "Alvorada", "RS");
-		Contato contatoFornecedor = new Contato("osvaldo@gmail.com", "123456789");
+		Endereco enderecoFornecedor = new Endereco(1, "Rua Biribiri", "12", "Bairro andromeda", null, "123456", "Alvorada", "RS");
+		Contato contatoFornecedor = new Contato(1, "osvaldo@gmail.com", "123456789");
 		Fornecedor fornecedorTeste = new Fornecedor(1, contatoFornecedor, enderecoFornecedor, "Pastelaria 007", "123456789");
 		
-		Endereco enderecoCliente = new Endereco("Rua Biribiri", "12", "Bairro andromeda", null, "123456", "Alvorada", "RS");
-		Contato contatoCliente = new Contato("osvaldo@gmail.com", "123456789");
+		Endereco enderecoCliente = new Endereco(1, "Rua Biribiri", "12", "Bairro andromeda", null, "123456", "Alvorada", "RS");
+		Contato contatoCliente = new Contato(1, "osvaldo@gmail.com", "123456789");
 		Cliente clienteTeste = new Cliente(1, contatoCliente, enderecoCliente, "Osvaldo Silva", "123456789");
 		
 		Produto produtoTest = new Produto("Teclado", "Teclado RGB", 20.00);
