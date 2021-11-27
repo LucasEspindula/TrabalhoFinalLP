@@ -16,15 +16,12 @@ public class Endereco {
 	private String cidade;
 	
 	private String estado;
-	
-	private int identificador;
 
-	public Endereco(int identificador, String rua, String numero, String bairro, String complemento, String cep, String cidade, String estado) {
+	public Endereco(String rua, String numero, String bairro, String complemento, String cep, String cidade, String estado) {
 		this.rua = rua;
 		this.numero = numero;
 		this.bairro = bairro;
 		this.complemento = complemento;
-		this.identificador = identificador;
 		this.cep = cep;
 		this.cidade = cidade;
 		this.estado = estado;
@@ -104,9 +101,5 @@ public class Endereco {
 
 	public String getEstado() {
 		return estado;
-	}
-
-	public int getId() {
-		return identificador;
 	}
 }

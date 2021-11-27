@@ -6,13 +6,10 @@ public class Contato {
 	private String email;
 	
 	private String telefone;
-	
-	private int identificador;
 
-	public Contato(int identificador, String email, String telefone) {
+	public Contato(String email, String telefone) {
 		this.email = email;
 		this.telefone = telefone;
-		this.identificador = identificador;
 		validacaoContato();
 	}
 	
@@ -45,9 +42,5 @@ public class Contato {
 
 	public String getTelefone() {
 		return telefone;
-	}
-
-	public int getId() {
-		return identificador;
 	}
 }

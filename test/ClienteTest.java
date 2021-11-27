@@ -8,8 +8,8 @@ public class ClienteTest {
 	@Test
 	public void deveTestarAcriacaoDeClienteValido() {
 		
-		Endereco enderecoOsvaldo = new Endereco(1, "Rua Biribiri", "12", "Bairro andromeda", null, "123456", "Alvorada", "RS");
-		Contato contatoOsvaldo = new Contato(1, "osvaldo@gmail.com", "123456789");
+		Endereco enderecoOsvaldo = new Endereco("Rua Biribiri", "12", "Bairro andromeda", null, "123456", "Alvorada", "RS");
+		Contato contatoOsvaldo = new Contato("osvaldo@gmail.com", "123456789");
 		Cliente clienteTeste = new Cliente(1, contatoOsvaldo, enderecoOsvaldo, "Osvaldo Silva", "123456789");
 		
 		Assert.assertEquals(1, clienteTeste.getId(), 1);

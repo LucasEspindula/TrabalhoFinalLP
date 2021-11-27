@@ -1,18 +1,30 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Produto {
+public class Produto implements Dominio<Integer>{
 	
 	private String nomeDoProduto;
 	
 	private String descricaoDoProduto;
 	
 	private Double valorUnitario;
+	
+	private int identificador;
 
+	// CONSTRUTOR PARA INSERT
 	public Produto(String nomeDoProduto, String descricaoDoProduto, Double valorUnitario) {
 		this.nomeDoProduto = nomeDoProduto;
 		this.descricaoDoProduto = descricaoDoProduto;
 		this.valorUnitario = valorUnitario;
+		validacao();
+	}
+	
+	// CONSTRUTOR PARA UPDATE
+	public Produto(int identificador, String nomeDoProduto, String descricaoDoProduto, Double valorUnitario) {
+		this.nomeDoProduto = nomeDoProduto;
+		this.descricaoDoProduto = descricaoDoProduto;
+		this.valorUnitario = valorUnitario;
+		this.identificador = identificador;
 		validacao();
 	}
 	
@@ -49,5 +61,9 @@ public class Produto {
 
 	public Double getValorUnitario() {
 		return valorUnitario;
+	}
+	
+	public Integer getId() {
+		return identificador;
 	}
 }

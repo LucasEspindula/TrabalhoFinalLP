@@ -37,6 +37,18 @@ public class Pedido implements Dominio<Integer>{
 		validacao();
 	}
 	
+	// CONSTRUTOR PARA BANCO DE DADOS
+	public Pedido(int identificador, Fornecedor fornecedor, Cliente cliente, Double valorFrete, 
+			LocalDateTime dataCompra, List<Item> itens) {
+		this.dataCompra = dataCompra;
+		this.fornecedor = fornecedor;
+		this.cliente = cliente;
+		this.valorFrete = valorFrete;
+		this.identificador = identificador;
+		this.itens = itens;
+		validacao();
+	}
+	
 	public void adicionarItem(Item item) {
 		// methodo guarda chuva, impede do null entrar na lista
 		if (item == null) {

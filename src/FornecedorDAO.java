@@ -3,75 +3,79 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
-public class FornecedorDAO implements GenericDAO<Fornecedor, Integer>{
+public class FornecedorDAO implements GenericDAO<Fornecedor, Integer> {
 
 	private Connection conexao;
-	
+
 	public FornecedorDAO() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://localhost:3306/ecommerce";
-			conexao = DriverManager.getConnection (url, "root", "21317046");
+			conexao = DriverManager.getConnection(url, "root", "21317046");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void add(Fornecedor model) {
-		try {
-			String insertEndereco = "INSERT INTO endereco (cep, estado, cidade, rua, bairro, numero, complemento) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement preparedStatementEndereco = conexao.prepareStatement(insertEndereco, Statement.RETURN_GENERATED_KEYS);
-			preparedStatementEndereco.setString(1, model.getEndereco().getCep());
-			preparedStatementEndereco.setString(2, model.getEndereco().getEstado());
-			preparedStatementEndereco.setString(3, model.getEndereco().getCidade());
-			preparedStatementEndereco.setString(4, model.getEndereco().getRua());
-			preparedStatementEndereco.setString(5, model.getEndereco().getBairro());
-			preparedStatementEndereco.setString(6, model.getEndereco().getNumero());
-			preparedStatementEndereco.setString(7, model.getEndereco().getComplemento());
-			preparedStatementEndereco.execute();
-			
-			long enderecoId = 0;
-	        try (ResultSet generatedKeys = preparedStatementEndereco.getGeneratedKeys()) {
-	            if (generatedKeys.next()) {
-	            	enderecoId = generatedKeys.getLong(1);
-	            }
-	            else {
-	                throw new SQLException("Creating user failed, no ID obtained.");
-	            }
-	        }
-			
-			String SQL = "INSERT INTO fornecedor (id_endereco, nomeFantasia, cnpj, email, telefone) VALUES(?, ?, ?, ?, ?)";
-			PreparedStatement preparedStatement = conexao.prepareStatement(SQL);
-			preparedStatement.setLong(1, enderecoId);
-			preparedStatement.setString(2, model.getNomeFantasia());
-			preparedStatement.setString(3, model.getCnpj());
-			preparedStatement.setString(4, model.getContato().getEmail());
-			preparedStatement.setString(5, model.getContato().getTelefone());
-			preparedStatement.execute();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
+
+		if (validaFornecedor(model.getCnpj())) {
+
+			throw new IllegalArgumentException("Fornecedor jah registrado!");
+		} else {
+
+			try {
+
+				String SQLfornecedor = "INSERT INTO fornecedor (nomeFantasia, cnpj, email_fr, telefone_fr, cep_fr, estado_fr, "
+						+ "cidade_fr, rua_fr, bairro_fr, numero_fr, complemento_fr) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+				PreparedStatement preparedStatementFornecedor = conexao.prepareStatement(SQLfornecedor);
+				preparedStatementFornecedor.setString(1, model.getNomeFantasia());
+				preparedStatementFornecedor.setString(2, model.getCnpj());
+				preparedStatementFornecedor.setString(3, model.getContato().getEmail());
+				preparedStatementFornecedor.setString(4, model.getContato().getTelefone());
+				preparedStatementFornecedor.setString(5, model.getEndereco().getCep());
+				preparedStatementFornecedor.setString(6, model.getEndereco().getEstado());
+				preparedStatementFornecedor.setString(7, model.getEndereco().getCidade());
+				preparedStatementFornecedor.setString(8, model.getEndereco().getRua());
+				preparedStatementFornecedor.setString(9, model.getEndereco().getBairro());
+				preparedStatementFornecedor.setString(10, model.getEndereco().getNumero());
+				preparedStatementFornecedor.setString(11, model.getEndereco().getComplemento());
+				preparedStatementFornecedor.execute();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		
+	}
+
+	public boolean validaFornecedor(String cnpj) {
+
+		try {
+
+			String sql = "SELECT * FROM fornecedor where cnpj='" + cnpj + "'";
+			PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+			ResultSet resultado = preparedStatement.executeQuery();
+			return resultado.next();
+
+		} catch (SQLException sqlException) {
+			throw new RuntimeException(sqlException.getMessage());
+		}
+
 	}
 
 	@Override
 	public List<Fornecedor> buscar() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Fornecedor buscarPorId(Integer id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
